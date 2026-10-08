@@ -45,3 +45,27 @@ dotnet run --project src/TaskManagement.Api
 ```
 
 После запуска API становится доступно по адресу, указанному приложением в консоли.
+
+## Структура репозитория
+
+```
+task-management-system/
+├── docs/               # проектная документация
+│   └── decisions/      # журнал архитектурных решений (ADR)
+├── img/                # схемы и скриншоты
+├── README.md           # этот файл
+├── Etap_1_task-management-system.md   # отчёт по этапу 1
+└── Etap_2_task-management-system.md   # отчёт по этапу 2
+```
+
+## Инструменты разработки
+
+В проекте используются:
+
+- `.gitignore` — исключение служебных файлов (`bin`, `obj`, `.vs`, `secrets.json` и т.д.)
+- `.editorconfig` — единые правила форматирования для всех разработчиков
+
+## Отчёты по этапам
+
+- [Этап 1. Артефакты и протоколы проекта](Etap_1_task-management-system.md)
+- [Этап 2. Настройка Git](Etap_2_task-management-system.md)
