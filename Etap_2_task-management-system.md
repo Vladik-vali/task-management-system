@@ -5,7 +5,9 @@
 Тема курсового проекта: «Разработка системы управления задачами проекта»
 
 МДК: 02.02 «Инструментальные средства разработки программного обеспечения»
+
 Стек: C# / .NET 9, Git
+
 Форма: этап курсового проектирования
 
 # 1. Исходное состояние
@@ -18,7 +20,7 @@ git log --oneline
 ```
 
 Текущая ветка на момент начала: `main`.
-Последний коммит: `docs: add Этап_1_task-management-system.md`.
+Последний коммит: `docs: add Etap_1_task-management-system.md`.
 
 ![Исходное состояние репозитория](img/etap2-git-log-before.png)
 
@@ -51,6 +53,8 @@ git push -u origin feature/git-setup
 
 Проверка: `git status` не показывает этих файлов и папок.
 
+![Файл .gitignore](img/etap2-gitignore.png)
+
 # 4. Добавление .editorconfig
 
 Добавлен файл `.editorconfig`, задающий единые правила форматирования:
@@ -63,6 +67,8 @@ git push -u origin feature/git-setup
 - для `.json`, `.yml` — отступ 2 пробела;
 - для `.md` — отступ 2 пробела, пробелы в конце сохраняются.
 
+![Файл .editorconfig](img/etap2-editorconfig.png)
+
 # 5. Коммиты этапа
 
 В ходе этапа выполнены следующие коммиты:
@@ -70,12 +76,21 @@ git push -u origin feature/git-setup
 ```text
 chore: add .gitignore и .editorconfig
 docs: add merge rules and tags to version-control.md
-docs: create Этап_2 report
+docs: add etap2 initial state screenshot
 docs: update README.md
 docs: update dependencies.md
+docs: add etap2 tag screenshot
+docs: add etap2 gitignore and editorconfig screenshots
+docs: add etap2 version-control.md screenshot
+docs: изменён в ветке conflict-demo
+docs: изменён README в ветке feature/git-setup
+fix: разрешён учебный конфликт в README.md
+docs: add etap2 conflict and history graph screenshots
 ```
 
-Всего: не менее пяти осмысленных коммитов.
+Всего: более пяти осмысленных коммитов.
+
+![Список коммитов](img/etap2-commits-list.png)
 
 # 6. Учебный тег контрольного состояния
 
@@ -86,12 +101,13 @@ git tag -a v0.1-git-setup -m "Настройка Git: .gitignore, .editorconfig,
 git push origin v0.1-git-setup
 ```
 
+![Тег v0.1-git-setup](img/etap2-tag.png)
+
 # 7. Учебный конфликт слияния
 
 ## 7.1. Создание ветки для конфликта
 
 ```bash
-git checkout main
 git checkout -b docs/conflict-demo
 ```
 
@@ -102,17 +118,17 @@ git checkout -b docs/conflict-demo
 Коммит:
 
 ```text
-docs: изменён README в ветке conflict-demo
+docs: изменён в ветке conflict-demo
 ```
 
-## 7.3. Изменение того же файла в main
+## 7.3. Изменение того же файла в исходной ветке
 
-Переключение в `main` и изменение того же файла иначе.
+Переключение в `feature/git-setup` и изменение того же файла иначе.
 
 Коммит:
 
 ```text
-docs: изменён README в ветке main
+docs: изменён README в ветке feature/git-setup
 ```
 
 ## 7.4. Слияние и конфликт
@@ -140,6 +156,8 @@ Automatic merge failed; fix conflicts and then commit the result.
 fix: разрешён учебный конфликт в README.md
 ```
 
+![Учебный конфликт](img/etap2-conflict.png)
+
 # 8. Граф истории
 
 ```bash
@@ -149,16 +167,23 @@ git log --oneline --graph --decorate --all
 Вывод команды приведён ниже:
 
 ```text
-*   xxxx (HEAD -> main, tag: v0.1-git-setup) fix: разрешён учебный конфликт в README.md
+* 26b47e2 (HEAD -> feature/git-setup, origin/feature/git-setup) docs: add etap2 conflict and history graph screenshots
+* 8983030 fix: разрешён учебный конфликт в README.md
 |\
-| * xxxx (docs/conflict-demo) docs: изменён README в ветке conflict-demo
-* | xxxx docs: изменён README в ветке main
+| * d699263 docs: изменён в ветке conflict-demo
+* | 0815ae8 docs: изменён README в ветке feature/git-setup
 |/
-* xxxx docs: update dependencies.md
-* xxxx docs: update README.md
-* xxxx docs: create Этап_2 report
-* xxxx docs: add merge rules and tags to version-control.md
-* xxxx chore: add .gitignore и .editorconfig
+* 6eb8145 docs: add etap2 version-control.md screenshot
+* d341961 docs: add etap2 gitignore and editorconfig screenshots
+* ec4927e docs: add etap2 tag screenshot
+* b64bd47 (tag: v0.1-git-setup) docs: add etap2 commits list screenshot
+* 89c1c2e docs: add etap2 initial state screenshot
+* 6db8502 docs: update dependencies.md
+* c5599b1 docs: update README.md
+* d39cf21 docs: add etap2 initial state screenshot
+* b2b2fc7 docs: add merge rules and tags to version-control.md
+* 1475cf2 chore: add .gitignore и .editorconfig
+* 50ce638 (origin/main, origin/HEAD, main) docs: add Etap_1_task-management-system.md
 ```
 
 ![Граф истории](img/etap2-git-log-graph.png)
@@ -171,6 +196,8 @@ git log --oneline --graph --decorate --all
 - правилами коммитов,
 - правилами слияния,
 - описанием тегов.
+
+![Правила ведения репозитория](img/etap2-version-control.png)
 
 # 10. Требования безопасности
 
@@ -200,4 +227,4 @@ git log --oneline --graph --decorate --all
 
 # 12. Вывод
 
-Настроена система контроля версий курсового проекта. Добавлены `.gitignore` и `.editorconfig`, исключены служебные файлы и секреты, создана рабочая ветка, выполнено не менее пяти осмысленных коммитов, поставлен тег контрольного состояния, смоделирован и разрешён учебный конфликт слияния. Получен граф истории. Документация по правилам работы с Git обновлена. Репозиторий подготовлен к командной разработке.
+Настроена система контроля версий курсового проекта. Добавлены `.gitignore` и `.editorconfig`, исключены служебные файлы и секреты, создана рабочая ветка, выполнено более пяти осмысленных коммитов, поставлен тег контрольного состояния, смоделирован и разрешён учебный конфликт слияния. Получен граф истории. Документация по правилам работы с Git обновлена. Репозиторий подготовлен к командной разработке.
