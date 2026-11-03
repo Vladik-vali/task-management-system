@@ -69,3 +69,4 @@ task-management-system/
 
 - [Этап 1. Артефакты и протоколы проекта](Etap_1_task-management-system.md)
 - [Этап 2. Настройка Git](Etap_2_task-management-system.md)
+- [Этап 3. Разработка и интеграция модулей](Etap_3_task-management-system.md)
