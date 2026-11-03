@@ -215,7 +215,7 @@ public async Task AssignUserAsync_UnknownUser_ReturnsUserNotFound()
 
 В `TaskManagement.IntegrationTests` создан `TaskAssignmentIntegrationTests` с двумя тестами, которые проверяют взаимодействие `TaskService` и `UserService`:
 
-1. **AssignUserAsync_ExistingUser_SucceedsThroughBothModules** — успешный сценарий через обе модуля.
+1. **AssignUserAsync_ExistingUser_SucceedsThroughBothModules** — успешный сценарий через оба модуля.
 2. **AssignUserAsync_UnknownUser_PropagatesErrorFromUserModule** — отрицательный сценарий: ошибка `USER_NOT_FOUND` пробрасывается из `UserService` через `TaskService`.
 
 # 9. Сборка и тесты
@@ -249,27 +249,11 @@ dotnet test
 
 # 11. Интеграционные проблемы и решения
 
-## Проблема 1. Несовпадение контракта
-
-**Ситуация:** при первом проектировании `TaskService` ожидал `AssignUserResult` с полем `Message`, а `UserService` возвращал `ErrorMessage`.
-
-**Решение:** контракт зафиксирован заранее в `TaskManagement.Contracts` до реализации модулей. Это позволило избежать переделки.
-
-## Проблема 2. Отсутствие регистрации зависимостей
-
-**Ситуация:** в `Program.cs` не была зарегистрирована зависимость `IUserService → UserService`, из-за чего `TaskService` не мог получить её через DI.
-
-**Решение:** добавлена регистрация:
-```csharp
-builder.Services.AddSingleton<IUserService, UserService>();
-builder.Services.AddSingleton<ITaskService, TaskService>();
-```
-
-## Проблема 3. Отсутствие контекста в логах
-
-**Ситуация:** в первых версиях логирование выводило только текст ошибки без `TaskId` и `UserId`.
-
-**Решение:** добавлены параметры в `LogInformation`/`LogWarning` с контекстом `{TaskId}` и `{UserId}`.
+| Проблема | Решение |
+|---|---|
+| Несовпадение полей `AssignUserResult` (`Message` vs `ErrorMessage`) | Контракт зафиксирован заранее в `TaskManagement.Contracts` |
+| Зависимость `IUserService` не зарегистрирована в DI | Добавлена регистрация в `Program.cs` |
+| В логах нет контекста (`TaskId`, `UserId`) | Добавлены параметры в `LogInformation`/`LogWarning` |
 
 # 12. История Git
 
@@ -301,12 +285,4 @@ git log --oneline --graph --decorate -15
 
 # 14. Вывод
 
-В рамках этапа 3 разработаны два взаимодействующих модуля: `UserService` и `TaskService`. Контракт между ними зафиксирован в проекте `TaskManagement.Contracts` до реализации. Интеграция выполнена через интерфейс `IUserService`.
-
-На границе модулей реализованы успешный и отрицательный сценарии. Добавлено журналирование с контекстом (`TaskId`, `UserId`). Созданы модульные тесты (2) и интеграционные тесты (2) — все 4 теста проходят.
-
-Сборка решения (`dotnet build`) выполняется без ошибок. Схема потока данных показывает путь запроса от клиента до модулей и обратно.
-
-Выявлены и устранены интеграционные проблемы: несовпадение контракта, отсутствие регистрации зависимостей, недостаточный контекст в логах.
-
-Работа выполнена в ветке `feature/modules-integration`, готова к слиянию в `main` через Pull Request.
+В рамках этапа 3 разработаны два взаимодействующих модуля — `UserService` и `TaskService`. Контракт зафиксирован заранее в `TaskManagement.Contracts`, интеграция выполнена через интерфейс `IUserService`. Реализованы успешный и отрицательный сценарии, добавлено журналирование с контекстом, написаны 2 модульных и 2 интеграционных теста (все проходят). Сборка и тесты (`dotnet build`, `dotnet test`) успешны. Ветка `feature/modules-integration` готова к слиянию в `main`.
