@@ -25,16 +25,19 @@ public class TaskServiceTests
     [Fact]
     public async Task CreateTask_EmptyProjectId_ShouldReturnFalse()
     {
+        // Act
         var result = await _taskService.CreateTaskAsync("Valid Title", Guid.Empty, CancellationToken.None);
 
+        // Assert
         Assert.False(result); 
     }
 
     [Fact]
     public async Task AssignUser_NullRequest_ShouldReturnError()
     {
-        var result = await _taskService.AssignUserAsync(null, CancellationToken.None);
+        var result = await _taskService.AssignUserAsync(null!, CancellationToken.None);
 
+        // Assert
         Assert.False(result.Success);
         Assert.Equal("INVALID_REQUEST", result.ErrorCode);
     }
