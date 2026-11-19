@@ -71,3 +71,4 @@ task-management-system/
 - [Этап 2. Настройка Git](Etap_2_task-management-system.md)
 - [Этап 3. Разработка и интеграция модулей](Etap_3_task-management-system.md)
 - [Этап 4. Отладка отдельных модулей](Etap_4_task-management-system.md)
+- [Этап 5. Инспекция кода модулей проекта](Etap_5_task-management-system.md)
