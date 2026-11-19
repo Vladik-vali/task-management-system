@@ -29,6 +29,12 @@ public class TaskService : ITaskService
             return Task.FromResult(false);
         }
 
+        if (projectId == Guid.Empty)
+        {
+            _logger.LogWarning("Project ID is empty");
+            return Task.FromResult(false);
+        }
+
         return Task.FromResult(true);
     }
 
@@ -36,6 +42,12 @@ public class TaskService : ITaskService
         AssignTaskRequest request,
         CancellationToken cancellationToken = default)
     {
+        if (request == null)
+        {
+            _logger.LogWarning("Assign request is null");
+            return new AssignUserResult(false, "INVALID_REQUEST");
+        }
+
         _logger.LogInformation(
             "TaskService delegating assignment of user {UserId} to task {TaskId}",
             request.UserId, request.TaskId);
